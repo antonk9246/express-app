@@ -7,14 +7,13 @@ services:
     restart: unless-stopped
   
   watchtower:
-    image: containrrr/watchtower
+    image: containrrr/watchtower:1.5.3
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.docker/config.json:/config.json:ro
     environment:
       - DOCKER_API_VERSION=1.44
-    command: --interval 30 --label-enable
+    command: --interval 30
     restart: unless-stopped
     labels:
       - "com.containrrr.watchtower.enable=true"
