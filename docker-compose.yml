@@ -1,0 +1,19 @@
+services:
+  app:
+    image: antonk92/node-express-app:latest
+    container_name: node-express-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+  
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOCKER_API_VERSION=1.44
+      - WATCHTOWER_POLL_INTERVAL=30
+      - WATCHTOWER_CLEANUP=true
+    command: --interval 30 --label-enable
+    restart: unless-stopped
