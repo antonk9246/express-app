@@ -7,13 +7,14 @@ services:
     restart: unless-stopped
   
   watchtower:
-    image: containrrr/watchtower:latest
+    image: containrrr/watchtower
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - DOCKER_API_VERSION=1.44
-      - WATCHTOWER_POLL_INTERVAL=30
-      - WATCHTOWER_CLEANUP=true
     command: --interval 30 --label-enable
     restart: unless-stopped
+    labels:
+      - "com.containrrr.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.enable=true"
